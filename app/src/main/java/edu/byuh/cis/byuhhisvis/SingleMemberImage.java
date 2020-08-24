@@ -15,7 +15,7 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import java.util.ArrayList;
 
 
-public class SingleTempleImage extends View {
+public class SingleMemberImage extends View {
 
     private float x;
     private float y;
@@ -30,24 +30,24 @@ public class SingleTempleImage extends View {
     private int idLastStore;
     private int idNextStore;
 
-    private Temple currentTemple;
-    private Temple lastTemple;
-    private Temple nextTemple;
+    private Member currentMember;
+    private Member lastMember;
+    private Member nextMember;
 
-    private ArrayList<Temple> threeTemples;
+    private ArrayList<Member> threeMembers;
 
     private Paint textPaint;
     private float canvasWidth;
     private float canvasHeight;
     private boolean orientationJustChanged = false;
 
-    public SingleTempleImage(Context context, int id, int idLast, int idNext) {
+    public SingleMemberImage(Context context, int id, int idLast, int idNext) {
         super(context);
         this.id = id;
         this.idLast = idLast;
         this.idNext = idNext;
 
-        threeTemples = new ArrayList<>();
+        threeMembers = new ArrayList<>();
 
         textPaint = new Paint();
         textPaint.setTextSize(50);
@@ -77,7 +77,7 @@ public class SingleTempleImage extends View {
         imageSize = Math.min(canvasWidth, canvasHeight) * 0.9f;
 
         if (firstTimeDraw || orientationJustChanged) {
-            threeTemples.clear();
+            threeMembers.clear();
 
             x = canvasCenterX - imageSize / 2;
             y = canvasCenterY - imageSize / 2;
@@ -85,15 +85,15 @@ public class SingleTempleImage extends View {
             Bitmap b = loadAndScale(getResources(), id, imageSize);
             Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
             Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
-            currentTemple = new Temple(b, 0f, 0f, 0f);
-            lastTemple = new Temple(bLast, 0f, 0f, 0f);
-            nextTemple = new Temple(bNext, 0f, 0f, 0f);
-            threeTemples.add(currentTemple);
-            threeTemples.add(lastTemple);
-            threeTemples.add(nextTemple);
-            currentTemple.setRole("current");
-            lastTemple.setRole("last");
-            nextTemple.setRole("next");
+            currentMember = new Member(b, 0f, 0f, 0f);
+            lastMember = new Member(bLast, 0f, 0f, 0f);
+            nextMember = new Member(bNext, 0f, 0f, 0f);
+            threeMembers.add(currentMember);
+            threeMembers.add(lastMember);
+            threeMembers.add(nextMember);
+            currentMember.setRole("current");
+            lastMember.setRole("last");
+            nextMember.setRole("next");
 
             firstTimeDraw = false;
             orientationJustChanged = false;
@@ -104,7 +104,7 @@ public class SingleTempleImage extends View {
 //        c.drawText(imageSize + ":imageSize", 100, 180, textPaint);
 //
 
-        for (Temple t: threeTemples) {
+        for (Member t: threeMembers) {
             if (t.role.equals("current")) {
                 c.drawBitmap(t.image, x, y, null);
             } else if (t.role.equals("last")) {
@@ -121,7 +121,7 @@ public class SingleTempleImage extends View {
 
     public void endOfAnimationAction() {
         x = canvasCenterX - imageSize / 2;
-        for (Temple t: threeTemples) {
+        for (Member t: threeMembers) {
             if (t.role.equals("current")) {
                 t.setRole("last");
             } else if (t.role.equals("last")) {
@@ -137,7 +137,7 @@ public class SingleTempleImage extends View {
         Bitmap bLast = loadAndScale(getResources(), idLast, imageSize);
         Bitmap bNext = loadAndScale(getResources(), idNext, imageSize);
 
-        for (Temple t: threeTemples) {
+        for (Member t: threeMembers) {
             if (t.role.equals("current")) {
                 t.changeImage(b);
             } else if (t.role.equals("last")) {

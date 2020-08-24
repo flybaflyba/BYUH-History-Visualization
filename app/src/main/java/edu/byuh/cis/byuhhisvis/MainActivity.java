@@ -47,7 +47,7 @@ import static java.lang.Boolean.TRUE;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TempleView tv;
+    private SpiralView tv;
     public SeekBar slider;
     public Context mContext;
     private int oldProgress;
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 1);
 
-        tv = new TempleView(this);
+        tv = new SpiralView(this);
         tv.getWindowSize(width, height);
         tv.setLayoutParams(nice);
         slider = findViewById(R.id.seekBar3);

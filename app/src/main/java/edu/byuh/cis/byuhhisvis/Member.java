@@ -2,7 +2,7 @@ package edu.byuh.cis.byuhhisvis;
 
 import android.graphics.Bitmap;
 
-public class Temple {
+public class Member {
     Bitmap image;
     Float size;
     Float x;
@@ -10,7 +10,7 @@ public class Temple {
     String role;
     String link;
 
-    public Temple(Bitmap imageP, Float sizeP, Float xP, Float yP) {
+    public Member(Bitmap imageP, Float sizeP, Float xP, Float yP) {
         image = imageP;
         size = sizeP;
         x = xP;

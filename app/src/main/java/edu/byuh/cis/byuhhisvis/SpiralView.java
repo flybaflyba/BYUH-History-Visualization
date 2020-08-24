@@ -38,7 +38,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 
-public class TempleView extends View {
+public class SpiralView extends View {
 
     private Paint bluePaint, redPaint, spiralPaint, yearDisplayPaint;
     private float screenWidth, screenHeight;
@@ -49,7 +49,7 @@ public class TempleView extends View {
     private float centerY;
     private float initialR;
     private boolean sliderMoving;
-    private static ArrayList<Temple> templeObjects; // more OO be more object oriented
+    private static ArrayList<Member> memberObjects; // more OO be more object oriented
     private ArrayList<ArrayList<Float>> onScreenTemples;
     private ArrayList<Float> oneOnScreenTemple;
     private ArrayList<ArrayList<Float>> spiralCoordinates;
@@ -81,12 +81,12 @@ public class TempleView extends View {
     private String selectedYear;
     private Integer realEachIndex;
     private String templeUrl;
-    private SingleTempleImage singleTempleImageView;
+    private SingleMemberImage singleMemberImageView;
     private int staticCoordinatesGet = 0;
     private AlertDialog singleTempleDialog;
 
 
-    public TempleView(Context context) {
+    public SpiralView(Context context) {
         super(context);
 
         bluePaint = new Paint();
@@ -157,8 +157,8 @@ public class TempleView extends View {
                 int atThisLine = 0;
                 while (( line = br.readLine()) != null) {
                     allTempleLinks.add(line+"\n");
-                    if (atThisLine < templeObjects.size()) {
-                        templeObjects.get(atThisLine).setLink(line+"\n");
+                    if (atThisLine < memberObjects.size()) {
+                        memberObjects.get(atThisLine).setLink(line+"\n");
                         atThisLine ++;
                     }
                 }
@@ -231,7 +231,7 @@ public class TempleView extends View {
     public ArrayList<String> getAllYearsFromAllTempleInfo(ArrayList<String> allTempleInfoPassIn) {
         ArrayList<String> temporary = new ArrayList<>();
 //        for (int i = 0; i < temples.size(); i++) {
-        for (int i = 0; i < templeObjects.size(); i++) { // more OO
+        for (int i = 0; i < memberObjects.size(); i++) { // more OO
             String year = allTempleInfo.get(i * 3 + 2) ;
             Locale curLocale = getResources().getConfiguration().locale;
             if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
@@ -426,13 +426,13 @@ public class TempleView extends View {
         lnlH.setOrientation(LinearLayout.HORIZONTAL);
 
         if (eachIndex == 0) {
-            singleTempleImageView = new SingleTempleImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
+            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
         } else {
-            singleTempleImageView = new SingleTempleImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
+            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
 
         }
 
-        singleTempleImageView.setPadding(0,0,0,0);
+        singleMemberImageView.setPadding(0,0,0,0);
         //singleTempleImageView.setBackgroundColor(Color.RED);
 
         // milestone dates
@@ -451,7 +451,7 @@ public class TempleView extends View {
         // here is where we get templeUrl, to avoid the eachIndex change error
         //final String templeUrl = allTempleLinks.get(eachIndex);
         realEachIndex = eachIndex; // we do this because each index is changing for some reason later...
-        templeUrl = templeObjects.get(realEachIndex).link;
+        templeUrl = memberObjects.get(realEachIndex).link;
 
         final TextView singleTempleDialogTitleView = new TextView(getContext());
         singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
@@ -476,9 +476,9 @@ public class TempleView extends View {
                     if (realEachIndex < 225) {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
-                            singleTempleImageView.moveImage("left");
-                            singleTempleImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), allLargeImageIds.get(realEachIndex + 1));
-                            templeUrl = templeObjects.get(realEachIndex).link;
+                            singleMemberImageView.moveImage("left");
+                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), allLargeImageIds.get(realEachIndex + 1));
+                            templeUrl = memberObjects.get(realEachIndex).link;
                             singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
                             oneTempleInfo = "";
                             readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
@@ -507,15 +507,15 @@ public class TempleView extends View {
                     if (realEachIndex > 0) {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex - 1;
-                            singleTempleImageView.moveImage("right");
+                            singleMemberImageView.moveImage("right");
                             int lastTempleId = 0;
                             if (realEachIndex - 1 < 0) {
                                 lastTempleId = allLargeImageIds.get(realEachIndex);
                             } else {
                                 lastTempleId = allLargeImageIds.get(realEachIndex - 1);
                             }
-                            singleTempleImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), lastTempleId, allLargeImageIds.get(realEachIndex + 1));
-                            templeUrl = templeObjects.get(realEachIndex).link;
+                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), lastTempleId, allLargeImageIds.get(realEachIndex + 1));
+                            templeUrl = memberObjects.get(realEachIndex).link;
                             singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
                             oneTempleInfo = "";
                             readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
@@ -531,13 +531,13 @@ public class TempleView extends View {
         });
 
         lnlH.addView(left);
-        lnlH.addView(singleTempleImageView);
+        lnlH.addView(singleMemberImageView);
         lnlH.addView(right);
         lnl.addView(singleTempleDialogTitleView);
         lnl.addView(lnlH);
         //lnlH.setBackgroundColor(Color.GREEN);
         lnl.addView(sv);
-        singleTempleImageView.setLayoutParams(nice);
+        singleMemberImageView.setLayoutParams(nice);
         left.setLayoutParams(niceFour);
         right.setLayoutParams(niceFour);
         lnlH.setLayoutParams(nice);
@@ -599,7 +599,7 @@ public class TempleView extends View {
                 if (templeUrl.equals("" + "\n")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("No Link Available");
-                    builder.setMessage("Temple does not have a website yet");
+                    builder.setMessage("Member does not have a website yet");
                     builder.setIcon(R.mipmap.ic_launcher_round);
                     //点击对话框以外的区域是否让对话框消失
                     builder.setCancelable(true);
@@ -620,8 +620,8 @@ public class TempleView extends View {
     public void orientationJustChanged(boolean b) {
         orientationJustChanged = b;
         //singleTempleImageView.updatePositionAndSizeOnceOrientationChanged();
-        if (singleTempleImageView != null) { // the rotate phone without clicking on a temple
-            singleTempleImageView.orientationJustChanged(b);
+        if (singleMemberImageView != null) { // the rotate phone without clicking on a temple
+            singleMemberImageView.orientationJustChanged(b);
         }
         //singleTempleImageView.invalidate();
 
@@ -747,7 +747,7 @@ public class TempleView extends View {
 
         //c.drawColor(Color.parseColor("#66ccff"));
 
-        //Temple View Background color
+        //Member View Background color
         //c.drawColor(Color.parseColor("#24292b"));
         c.drawColor(Color.parseColor("#17252a"));
 
@@ -766,18 +766,18 @@ public class TempleView extends View {
             }
             ImageCache.init(getResources(), temp, screenHeight);
 
-            allLargeImageIds = ImageCache.getAllImageIds();
-            allTempleInfoFileIds = ImageCache.getAllTempleInfoFileIds();
+            allLargeImageIds = ImageCache.getAllLargeImagesIds();
+            allTempleInfoFileIds = ImageCache.getAllInfoFilesIds();
 
             //temples = ImageCache.getTemplesList();
-            templeObjects = ImageCache.getTempleObjectsList(); // more OO
+            memberObjects = ImageCache.getTempleObjectsList(); // more OO
 
             readLinksFile();
             readInfoFile();
 
 
-//            for (Temple t: templeObjects) {
-//                t.setLink(allTempleLinks.get(templeObjects.indexOf(t)));
+//            for (Member t: memberObjects) {
+//                t.setLink(allTempleLinks.get(memberObjects.indexOf(t)));
 //            }
 
             yearDisplayPaint.setColor(Color.parseColor("#def2f1"));
@@ -804,7 +804,7 @@ public class TempleView extends View {
 
     }
 
-    public void drawTempleLabels(float ts, Temple t, Canvas c) { // more OO
+    public void drawTempleLabels(float ts, Member t, Canvas c) { // more OO
 
         float newCurrentTempleRadius = t.size * screenWidth / 2;
 
@@ -817,7 +817,7 @@ public class TempleView extends View {
         thisTempleLabelPaint.setShadowLayer(20,0,-5,Color.BLACK);
 
 //        int thisTempleIndex = temples.indexOf(t);
-        int thisTempleIndex = templeObjects.indexOf(t); // more OO
+        int thisTempleIndex = memberObjects.indexOf(t); // more OO
 
         String thisTempleName = allTempleInfo.get(thisTempleIndex*3);
         Locale curLocale = getResources().getConfiguration().locale;
@@ -864,7 +864,7 @@ public class TempleView extends View {
         selectedYear = s;
     }
 
-    public void actuallyDrawing(Temple t, Canvas c, int thisTempleIndex) { // more OO
+    public void actuallyDrawing(Member t, Canvas c, int thisTempleIndex) { // more OO
 
 
         float newCurrentTempleRadius = t.size * screenWidth / 2;
@@ -904,9 +904,9 @@ public class TempleView extends View {
         //Log.d("spiralcoors: ", " in placeallcircles " + spiralCoordinates + " ");
 
         onScreenTemples.clear();
-        for (Temple t : templeObjects) { //more OO: for (Bitmap t : temples) {
-            int thisTempleIndex = templeObjects.indexOf(t); // more OO: int thisTempleIndex = temples.indexOf(t);
-            float ts = theta - 30 * templeObjects.indexOf(t); // more OO: float ts = theta - 30 * temples.indexOf(t);
+        for (Member t : memberObjects) { //more OO: for (Bitmap t : temples) {
+            int thisTempleIndex = memberObjects.indexOf(t); // more OO: int thisTempleIndex = temples.indexOf(t);
+            float ts = theta - 30 * memberObjects.indexOf(t); // more OO: float ts = theta - 30 * temples.indexOf(t);
             if (ts > 0 && ts < spiralCoordinates.size() - 1) {
 
                 // set this temple's size, x and y once we know it should be on screen
