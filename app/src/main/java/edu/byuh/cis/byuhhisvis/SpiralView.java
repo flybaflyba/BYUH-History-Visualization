@@ -110,7 +110,7 @@ public class SpiralView extends View {
         allTempleLinks = new ArrayList<>();
         allTempleInfo = new ArrayList<>();
         allYears = new ArrayList<>();
-        theta = 5550;
+        theta = 4400;
         currentTempleMatrix = new Matrix();
         coordinatesAndSizesUpdated = FALSE;
         orientationJustChanged = FALSE;

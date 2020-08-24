@@ -29,7 +29,7 @@ public class ImageCache {
 
         ArrayList<Member> allObjectsList = new ArrayList<>();
 
-        for (int i = 0; i <= 226; i ++) {
+        for (int i = 0; i <= 144; i ++) {
             allObjectsList.add(new Member(empty, 0f, 0f, 0f));
             // repeat this step to create objects with all resized bitmaps
         }
@@ -41,7 +41,7 @@ public class ImageCache {
 
         ArrayList<Integer> allLargeImagesIds = new ArrayList<>();
 
-        for (int i = 0; i <= 226; i ++) {
+        for (int i = 0; i <= 144; i ++) {
             allLargeImagesIds.add(R.drawable.shanghai_china_temple_large);
             // repeat this step to add all large images' id to a list
         }
@@ -53,7 +53,7 @@ public class ImageCache {
 
         ArrayList<Integer> allInfoFilesIds = new ArrayList<>();
 
-        for (int i = 0; i <= 226; i ++) {
+        for (int i = 0; i <= 144; i ++) {
             allInfoFilesIds.add(R.raw.shanghai_china_temple);
             // repeat this step to add all info files' ids to a list
         }

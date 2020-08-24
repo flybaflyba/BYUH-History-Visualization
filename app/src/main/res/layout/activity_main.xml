@@ -7,7 +7,7 @@
     android:layout_height="200dp"
     android:orientation="horizontal"
     android:visibility="visible"
-    tools:context="edu.byuh.cis.templevis.MainActivity">
+    tools:context="edu.byuh.cis.byuhhisvis.MainActivity">
 
     <LinearLayout
         android:id="@+id/sliderLabel"
@@ -134,7 +134,7 @@
         android:id="@+id/seekBar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="6800"
+        android:max="4400"
         android:progress="0"
         android:progressDrawable="@drawable/slider"
         android:thumb="@drawable/slider_button"

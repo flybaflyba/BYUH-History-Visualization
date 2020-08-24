@@ -166,14 +166,14 @@ public class MainActivity extends AppCompatActivity {
         //slider.setBackgroundColor(Color.parseColor("#669cff"));
         //slider.setBackgroundColor(Color.parseColor("#202224"));
         slider.setBackgroundColor(Color.parseColor("#287a78"));
-        slider.setProgress(5550);
+        slider.setProgress(4400);
         //slider.setBackgroundColor(Color.parseColor("#292d30"));
 
         //android:progressDrawable="@drawable/slider"
 
         timA = new MyTimer();
 
-        progress = 5550;
+        progress = 4400;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             slider.setMin(30);
