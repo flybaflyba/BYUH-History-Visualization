@@ -13,10 +13,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.net.Uri;
 import android.os.Build;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -186,7 +188,7 @@ public class SpiralView extends View {
                 String line;
                 //read each line
                 while (( line = br.readLine()) != null) {
-                    oneTempleInfo = oneTempleInfo + line+"\n";
+                    oneTempleInfo = oneTempleInfo + line + "\n";
                 }
                 allTempleInfoFile.close();
             }
@@ -395,6 +397,9 @@ public class SpiralView extends View {
         LinearLayout.LayoutParams nice = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 1);
+        LinearLayout.LayoutParams niceTwo = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT, 2);
         LinearLayout.LayoutParams niceFour = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT, 4);
@@ -427,6 +432,8 @@ public class SpiralView extends View {
         singleTempleTextView.setText(oneTempleInfo);
         //singleTempleTextView.setBackgroundColor(Color.BLUE);
         singleTempleTextView.setGravity(Gravity.CENTER);
+        singleTempleTextView.setLayoutParams(nice);
+        singleTempleTextView.setTextSize(15);
 
         ScrollView sv = new ScrollView(getContext());
         //sv.setPadding(100,100,100,100);
@@ -514,17 +521,28 @@ public class SpiralView extends View {
             }
         });
 
-        lnlH.addView(left);
-        lnlH.addView(singleMemberImageView);
-        lnlH.addView(right);
-        lnl.addView(singleTempleDialogTitleView);
-        lnl.addView(lnlH);
-        //lnlH.setBackgroundColor(Color.GREEN);
-        lnl.addView(sv);
         singleMemberImageView.setLayoutParams(nice);
         left.setLayoutParams(niceFour);
         right.setLayoutParams(niceFour);
         lnlH.setLayoutParams(nice);
+
+
+        lnlH.addView(left);
+        lnlH.addView(singleMemberImageView);
+        lnlH.addView(right);
+
+        lnl.addView(singleTempleDialogTitleView);
+        singleTempleDialogTitleView.setBackgroundColor(Color.YELLOW);
+        lnl.addView(lnlH);
+        lnlH.setBackgroundColor(Color.GREEN);
+//        lnl.addView(sv);
+//        sv.setBackgroundColor(Color.RED);
+        ((ViewGroup)singleTempleTextView.getParent()).removeView(singleTempleTextView);
+        lnl.addView(singleTempleTextView);
+        singleTempleTextView.setBackgroundColor(Color.RED);
+        singleTempleTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.3));
+        singleTempleTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         // singleTempleDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         //builder.setTitle(allTempleInfo.get(realEachIndex*3));
@@ -549,7 +567,7 @@ public class SpiralView extends View {
         int h = 0;
         int w = 0;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            h = (int)(Math.min(windowHeight, windowWidth) * 1.2);
+            h = (int)(Math.min(windowHeight, windowWidth) * 1.5);
             w = (int)Math.min(windowHeight, windowWidth);
         } else {
             h = (int)(Math.min(windowHeight, windowWidth) * 0.9);
@@ -614,7 +632,7 @@ public class SpiralView extends View {
         int h = 0;
         int w = 0;
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            h = (int)(Math.min(windowHeight, windowWidth) * 1.2);
+            h = (int)(Math.min(windowHeight, windowWidth) * 1.5);
             w = (int)Math.min(windowHeight, windowWidth);
         } else {
             h = (int)(Math.min(windowHeight, windowWidth) * 0.9);
