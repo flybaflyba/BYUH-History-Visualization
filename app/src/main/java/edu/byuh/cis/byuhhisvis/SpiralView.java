@@ -55,7 +55,7 @@ public class SpiralView extends View {
     private ArrayList<ArrayList<Float>> spiralCoordinates;
     private ArrayList<Float> sizes;
     private ArrayList<String> allTempleLinks;
-    private ArrayList<String> allTempleInfo;
+    private ArrayList<String> allEventsDates;
     public ArrayList<String> allYears;
     private int eachIndex;
     private Matrix currentTempleMatrix;
@@ -108,7 +108,7 @@ public class SpiralView extends View {
         onScreenTemples = new ArrayList<>();
         oneOnScreenTemple = new ArrayList<>();
         allTempleLinks = new ArrayList<>();
-        allTempleInfo = new ArrayList<>();
+        allEventsDates = new ArrayList<>();
         allYears = new ArrayList<>();
         theta = 4400;
         currentTempleMatrix = new Matrix();
@@ -203,7 +203,7 @@ public class SpiralView extends View {
 
     public void readInfoFile() {
         try {
-            InputStream allTempleInfoFile =  this.getResources().openRawResource(R.raw.temple_info);
+            InputStream allTempleInfoFile =  this.getResources().openRawResource(R.raw.all_events_dates);
             if (allTempleInfoFile != null)
             {
                 InputStreamReader ir = new InputStreamReader(allTempleInfoFile);
@@ -211,10 +211,11 @@ public class SpiralView extends View {
                 String line;
                 //read each line
                 while (( line = br.readLine()) != null) {
-                    allTempleInfo.add(line+"\n");
+                    allEventsDates.add(line+"\n");
+                    allYears.add(line.substring(line.length() - 5));
                 }
                 allTempleInfoFile.close();
-                allYears = getAllYearsFromAllTempleInfo(allTempleInfo);
+
             }
         }
         catch (java.io.FileNotFoundException e)
@@ -228,23 +229,6 @@ public class SpiralView extends View {
 
     }
 
-    public ArrayList<String> getAllYearsFromAllTempleInfo(ArrayList<String> allTempleInfoPassIn) {
-        ArrayList<String> temporary = new ArrayList<>();
-//        for (int i = 0; i < temples.size(); i++) {
-        for (int i = 0; i < memberObjects.size(); i++) { // more OO
-            String year = allTempleInfo.get(i * 3 + 2) ;
-            Locale curLocale = getResources().getConfiguration().locale;
-            if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
-                // do nothing //中文
-                year = year;
-            } else {
-                year = year.substring(year.length()-5);
-                //英文
-            }
-            temporary.add(year.substring(0,4));
-        }
-        return temporary;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -454,7 +438,7 @@ public class SpiralView extends View {
         templeUrl = memberObjects.get(realEachIndex).link;
 
         final TextView singleTempleDialogTitleView = new TextView(getContext());
-        singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
+        singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
         singleTempleDialogTitleView.setTextSize(20);
         singleTempleDialogTitleView.setPadding(0,20,0,0);
         singleTempleDialogTitleView.setTextColor(Color.BLACK);
@@ -473,13 +457,13 @@ public class SpiralView extends View {
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
                     // do nothing
                 }else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    if (realEachIndex < 225) {
+                    if (realEachIndex < 144) {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
                             singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), allLargeImageIds.get(realEachIndex + 1));
                             templeUrl = memberObjects.get(realEachIndex).link;
-                            singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
+                            singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
                             oneTempleInfo = "";
                             readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
                             singleTempleTextView.setText(oneTempleInfo);
@@ -516,7 +500,7 @@ public class SpiralView extends View {
                             }
                             singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), lastTempleId, allLargeImageIds.get(realEachIndex + 1));
                             templeUrl = memberObjects.get(realEachIndex).link;
-                            singleTempleDialogTitleView.setText(allTempleInfo.get(realEachIndex*3));
+                            singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
                             oneTempleInfo = "";
                             readOneInfoFile(allTempleInfoFileIds.get(realEachIndex));
                             singleTempleTextView.setText(oneTempleInfo);
@@ -819,7 +803,7 @@ public class SpiralView extends View {
 //        int thisTempleIndex = temples.indexOf(t);
         int thisTempleIndex = memberObjects.indexOf(t); // more OO
 
-        String thisTempleName = allTempleInfo.get(thisTempleIndex*3);
+        String thisTempleName = allEventsDates.get(thisTempleIndex);
         Locale curLocale = getResources().getConfiguration().locale;
 
         String thisTempleLocation = "";
@@ -953,8 +937,8 @@ public class SpiralView extends View {
             firstOnScreenTempleIndex = (onScreenTemples.get(0).get(0));
         }
 
-        String endYear = allTempleInfo.get((int)(firstOnScreenTempleIndex) * 3 + 2);
-        String startYear = allTempleInfo.get((int)(lastOnScreenTempleIndex) * 3 + 2) ;
+        String endYear = allEventsDates.get((int)(firstOnScreenTempleIndex));
+        String startYear = allEventsDates.get((int)(lastOnScreenTempleIndex)) ;
 
 
 
@@ -993,8 +977,8 @@ public class SpiralView extends View {
             lastOnScreenTempleIndex = (onScreenTemples.get(onScreenTemples.size()-1).get(0));
             firstOnScreenTempleIndex = (onScreenTemples.get(0).get(0));
         }
-        String endYear = allTempleInfo.get((int)(firstOnScreenTempleIndex) * 3 + 2);
-        String startYear = allTempleInfo.get((int)(lastOnScreenTempleIndex) * 3 + 2) ;
+        String endYear = allEventsDates.get((int)(firstOnScreenTempleIndex));
+        String startYear = allEventsDates.get((int)(lastOnScreenTempleIndex)) ;
 
         Locale curLocale = getResources().getConfiguration().locale;
         if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
