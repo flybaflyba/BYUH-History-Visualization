@@ -468,7 +468,13 @@ public class SpiralView extends View {
                         if (System.currentTimeMillis() - timeStamp[0] > 1550) {
                             realEachIndex = realEachIndex + 1;
                             singleMemberImageView.moveImage("left");
-                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), allLargeImageIds.get(realEachIndex + 1));
+                            int nextTempleId = 0;
+                            if (realEachIndex + 1 > 144) {
+                                nextTempleId = allLargeImageIds.get(realEachIndex);
+                            } else {
+                                nextTempleId = allLargeImageIds.get(realEachIndex + 1);
+                            }
+                            singleMemberImageView.updateThreeTemplesBitmapIds(allLargeImageIds.get(realEachIndex), allLargeImageIds.get(realEachIndex - 1), nextTempleId);
                             templeUrl = memberObjects.get(realEachIndex).link;
                             singleTempleDialogTitleView.setText(allEventsDates.get(realEachIndex));
                             oneTempleInfo = "";
