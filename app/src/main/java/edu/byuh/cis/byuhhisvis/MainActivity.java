@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         slider.setProgress(lastProgress);
                     }
-                    Log.d("progress", "IN oProgressChanged is " + i + " ");
+                    //Log.d("progress", "IN oProgressChanged is " + i + " ");
                 //}
 
 
