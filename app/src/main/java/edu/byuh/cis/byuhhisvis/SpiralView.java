@@ -366,7 +366,7 @@ public class SpiralView extends View {
                         //Toast.makeText(getContext(), "how many onScreenTemples last time? " + onScreenTemples.size(), Toast.LENGTH_SHORT).show();
                         //Log.d("singleTempleViewOpen? ", singleTempleViewOpened + "");
                         if (singleTempleViewOpened == false) {
-                            if (eachIndex <= 226) {
+                            if (eachIndex <= 144) { // it's useless here, it;'s for the older version of the app, this number should be equal the the number of objects - 1, so that all circles can b bring up detail dialog.
                                 singleTempleViewOpened = true;
                                 //Log.d("eachIndex is ", eachIndex + " when click on circle");
                                 singleTempleDialog();
@@ -416,6 +416,8 @@ public class SpiralView extends View {
 
         if (eachIndex == 0) {
             singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex + 1));
+        } else if (eachIndex == 144){
+            singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex)); // no next event
         } else {
             singleMemberImageView = new SingleMemberImage(getContext(), allLargeImageIds.get(eachIndex), allLargeImageIds.get(eachIndex - 1), allLargeImageIds.get(eachIndex + 1));
 
