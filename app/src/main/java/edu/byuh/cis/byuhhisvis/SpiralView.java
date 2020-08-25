@@ -812,12 +812,12 @@ public class SpiralView extends View {
 
         placeAllCircles(c);
 
-//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            yearDisplayLandscape(c);
-//
-//        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            yearDisplay(c);
-//        }
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            yearDisplayLandscape(c);
+
+        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //yearDisplay(c);
+        }
 
 
     }
@@ -1005,41 +1005,43 @@ public class SpiralView extends View {
     }
 
     public void yearDisplayLandscape(Canvas c) {
-        c.drawRect( 5 * screenWidth / 4, 0, 2 * screenWidth, screenHeight, bluePaint);
-        float firstOnScreenTempleIndex = 0;
-        float lastOnScreenTempleIndex = 0;
 
-        // new year display logic
-        if (onScreenTemples.size() != 0) {
-            lastOnScreenTempleIndex = (onScreenTemples.get(onScreenTemples.size()-1).get(0));
-            firstOnScreenTempleIndex = (onScreenTemples.get(0).get(0));
-        }
-        String endYear = allEventsDates.get((int)(firstOnScreenTempleIndex));
-        String startYear = allEventsDates.get((int)(lastOnScreenTempleIndex)) ;
+          c.drawText("Welcome!", 6.5f * screenWidth / 4, 18 * screenHeight / 40, yearDisplayPaint);
 
-        Locale curLocale = getResources().getConfiguration().locale;
-        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
-            // do nothing //中文
-            startYear = startYear.substring(0,4);
-            endYear = endYear.substring(0,4);
-        } else {
-            startYear = startYear.substring(startYear.length()-5);
-            endYear = endYear.substring(endYear.length()-5);
-            //英文
-        }
-
-        if (theta <= 40){
-            c.drawText(getResources().getString(R.string.first_temple), 6.5f * screenWidth / 4, 18 * screenHeight / 40, yearDisplayPaint);
-            c.drawText("1836", 6.5f * screenWidth / 4, 22 * screenHeight / 40, yearDisplayPaint);
-        } else if (theta > 5550 ) {
-            c.drawText(getResources().getString(R.string.future_temples), 6.5f * screenWidth / 4, 20 * screenHeight / 40, yearDisplayPaint);
-        } else if (endYear.contains("0000") || endYear.contains("1111")){
-            c.drawText(getResources().getString(R.string.years_of_temples) + " " , 6.5f * screenWidth / 4, 15 * screenHeight / 40, yearDisplayPaint);
-            c.drawText(startYear + " --- " + 2020, 6.5f * screenWidth / 4, 25 * screenHeight / 40, yearDisplayPaint);
-        } else {
-            c.drawText(getResources().getString(R.string.years_of_temples) + " " , 6.5f * screenWidth / 4, 15 * screenHeight / 40, yearDisplayPaint);
-            c.drawText(startYear + " --- " + endYear, 6.5f * screenWidth / 4, 25 * screenHeight / 40, yearDisplayPaint);
-       }
+//        c.drawRect( 5 * screenWidth / 4, 0, 2 * screenWidth, screenHeight, bluePaint);
+//        float firstOnScreenTempleIndex = 0;
+//        float lastOnScreenTempleIndex = 0;
+//
+//        // new year display logic
+//        if (onScreenTemples.size() != 0) {
+//            lastOnScreenTempleIndex = (onScreenTemples.get(onScreenTemples.size()-1).get(0));
+//            firstOnScreenTempleIndex = (onScreenTemples.get(0).get(0));
+//        }
+//        String endYear = allEventsDates.get((int)(firstOnScreenTempleIndex));
+//        String startYear = allEventsDates.get((int)(lastOnScreenTempleIndex)) ;
+//
+//        Locale curLocale = getResources().getConfiguration().locale;
+//        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
+//            // do nothing //中文
+//            startYear = startYear.substring(0,4);
+//            endYear = endYear.substring(0,4);
+//        } else {
+//            startYear = startYear.substring(startYear.length()-5);
+//            endYear = endYear.substring(endYear.length()-5);
+//            //英文
+//        }
+//        if (theta <= 40){
+//            c.drawText(getResources().getString(R.string.first_temple), 6.5f * screenWidth / 4, 18 * screenHeight / 40, yearDisplayPaint);
+//            c.drawText("1836", 6.5f * screenWidth / 4, 22 * screenHeight / 40, yearDisplayPaint);
+//        } else if (theta > 5550 ) {
+//            c.drawText(getResources().getString(R.string.future_temples), 6.5f * screenWidth / 4, 20 * screenHeight / 40, yearDisplayPaint);
+//        } else if (endYear.contains("0000") || endYear.contains("1111")){
+//            c.drawText(getResources().getString(R.string.years_of_temples) + " " , 6.5f * screenWidth / 4, 15 * screenHeight / 40, yearDisplayPaint);
+//            c.drawText(startYear + " --- " + 2020, 6.5f * screenWidth / 4, 25 * screenHeight / 40, yearDisplayPaint);
+//        } else {
+//            c.drawText(getResources().getString(R.string.years_of_temples) + " " , 6.5f * screenWidth / 4, 15 * screenHeight / 40, yearDisplayPaint);
+//            c.drawText(startYear + " --- " + endYear, 6.5f * screenWidth / 4, 25 * screenHeight / 40, yearDisplayPaint);
+//       }
     }
 
     public void getCoordinates() {
