@@ -532,14 +532,14 @@ public class SpiralView extends View {
         lnlH.addView(right);
 
         lnl.addView(singleTempleDialogTitleView);
-        singleTempleDialogTitleView.setBackgroundColor(Color.YELLOW);
+        //singleTempleDialogTitleView.setBackgroundColor(Color.YELLOW);
         lnl.addView(lnlH);
-        lnlH.setBackgroundColor(Color.GREEN);
+        //lnlH.setBackgroundColor(Color.GREEN);
 //        lnl.addView(sv);
 //        sv.setBackgroundColor(Color.RED);
         ((ViewGroup)singleTempleTextView.getParent()).removeView(singleTempleTextView);
         lnl.addView(singleTempleTextView);
-        singleTempleTextView.setBackgroundColor(Color.RED);
+        //singleTempleTextView.setBackgroundColor(Color.RED);
         singleTempleTextView.setHeight((int)(Math.min(screenWidth, screenHeight) * 0.3));
         singleTempleTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
 
@@ -801,12 +801,12 @@ public class SpiralView extends View {
 
         placeAllCircles(c);
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            yearDisplayLandscape(c);
-
-        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            yearDisplay(c);
-        }
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            yearDisplayLandscape(c);
+//
+//        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            yearDisplay(c);
+//        }
 
 
     }
@@ -819,52 +819,55 @@ public class SpiralView extends View {
 
         thisTempleLabelPaint.setColor(Color.parseColor("#def2f1"));
         thisTempleLabelPaint.setStyle(Paint.Style.FILL);
-        thisTempleLabelPaint.setTextSize((int)(newCurrentTempleRadius / 5));
+        thisTempleLabelPaint.setTextSize((int)(newCurrentTempleRadius/3));
         thisTempleLabelPaint.setTextAlign(Paint.Align.CENTER);
-        thisTempleLabelPaint.setShadowLayer(20,0,-5,Color.BLACK);
+        thisTempleLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
 
 //        int thisTempleIndex = temples.indexOf(t);
         int thisTempleIndex = memberObjects.indexOf(t); // more OO
 
         String thisTempleName = allEventsDates.get(thisTempleIndex);
-        Locale curLocale = getResources().getConfiguration().locale;
+        c.drawText(thisTempleName.substring(thisTempleName.length() - 5), t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize()/2, thisTempleLabelPaint);
 
-        String thisTempleLocation = "";
-        //通过Locale的equals方法，判断出当前语言环境
-        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
-            //中文
-            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 3);
-        } else {
-            //英文
-            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 7);
-        }
-        //String thisTempleLocation = thisTempleName ;//.substring(0, thisTempleName.length() - 7);
 
-        String[] thisTempleLocationWords = thisTempleLocation.split(" ");
-
-        String thisTempleNameOne = "";
-        String thisTempleNameTwo = "";
-        if (thisTempleLocationWords.length % 2 == 0) { // if there are even number of words in location, then each line has the same number of words
-            for (int i = 0; i < thisTempleLocationWords.length / 2; i ++) {
-                thisTempleNameOne += thisTempleLocationWords[i] + " ";
-            }
-            for (int i = thisTempleLocationWords.length / 2; i < thisTempleLocationWords.length ; i ++) {
-                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
-            }
-        } else { // if there are odd number of words in location, then first line has one more line than second line
-            for (int i = 0; i < thisTempleLocationWords.length / 2 + 1; i ++) {
-                thisTempleNameOne += thisTempleLocationWords[i] + " ";
-            }
-            for (int i = thisTempleLocationWords.length / 2 + 1; i < thisTempleLocationWords.length ; i ++) {
-                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
-            }
-        }
-
-        if (sliderMoving == false && ts < 200 && thisTempleIndex < 185 && show_label) {
-            //c.drawText(thisTempleName, currentTempleX, currentTempleY + newCurrentTempleRadius + thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
-            c.drawText(thisTempleNameOne, t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
-            c.drawText(thisTempleNameTwo, t.x, t.y + newCurrentTempleRadius, thisTempleLabelPaint);
-        }
+//        Locale curLocale = getResources().getConfiguration().locale;
+//
+//        String thisTempleLocation = "";
+//        //通过Locale的equals方法，判断出当前语言环境
+//        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
+//            //中文
+//            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 3);
+//        } else {
+//            //英文
+//            thisTempleLocation = thisTempleName.substring(0, thisTempleName.length() - 7);
+//        }
+//        //String thisTempleLocation = thisTempleName ;//.substring(0, thisTempleName.length() - 7);
+//
+//        String[] thisTempleLocationWords = thisTempleLocation.split(" ");
+//
+//        String thisTempleNameOne = "";
+//        String thisTempleNameTwo = "";
+//        if (thisTempleLocationWords.length % 2 == 0) { // if there are even number of words in location, then each line has the same number of words
+//            for (int i = 0; i < thisTempleLocationWords.length / 2; i ++) {
+//                thisTempleNameOne += thisTempleLocationWords[i] + " ";
+//            }
+//            for (int i = thisTempleLocationWords.length / 2; i < thisTempleLocationWords.length ; i ++) {
+//                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
+//            }
+//        } else { // if there are odd number of words in location, then first line has one more line than second line
+//            for (int i = 0; i < thisTempleLocationWords.length / 2 + 1; i ++) {
+//                thisTempleNameOne += thisTempleLocationWords[i] + " ";
+//            }
+//            for (int i = thisTempleLocationWords.length / 2 + 1; i < thisTempleLocationWords.length ; i ++) {
+//                thisTempleNameTwo += thisTempleLocationWords[i] + " ";
+//            }
+//        }
+//
+//        if (sliderMoving == false && ts < 200 && thisTempleIndex < 185 && show_label) {
+//            //c.drawText(thisTempleName, currentTempleX, currentTempleY + newCurrentTempleRadius + thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
+//            c.drawText(thisTempleNameOne, t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize(), thisTempleLabelPaint);
+//            c.drawText(thisTempleNameTwo, t.x, t.y + newCurrentTempleRadius, thisTempleLabelPaint);
+//        }
     }
 
     public void getSelectedYear(String s) {
