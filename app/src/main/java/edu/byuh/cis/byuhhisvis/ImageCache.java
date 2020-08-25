@@ -13,7 +13,7 @@ public class ImageCache {
     public static void init(Resources res, float w2, float h) {
         float w = w2 / 4;
 
-        empty = loadAndScale(res,R.drawable.shanghai_china_temple,w);
+        empty = loadAndScale(res,R.drawable.example,w);
 
         // repeat last step too load all bitmaps
     }
@@ -42,7 +42,7 @@ public class ImageCache {
         ArrayList<Integer> allLargeImagesIds = new ArrayList<>();
 
         for (int i = 0; i <= 144; i ++) {
-            allLargeImagesIds.add(R.drawable.shanghai_china_temple_large);
+            allLargeImagesIds.add(R.drawable.example_large);
             // repeat this step to add all large images' id to a list
         }
 
