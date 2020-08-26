@@ -842,8 +842,11 @@ public class SpiralView extends View {
         int thisTempleIndex = memberObjects.indexOf(t); // more OO
 
         String thisTempleName = allEventsDates.get(thisTempleIndex);
-        c.drawText(thisTempleName.substring(thisTempleName.length() - 5), t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize()/2, thisTempleLabelPaint);
 
+
+        if (sliderMoving == false && show_label) {
+            c.drawText(thisTempleName.substring(thisTempleName.length() - 5), t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize()/2, thisTempleLabelPaint);
+        }
 
 //        Locale curLocale = getResources().getConfiguration().locale;
 //
