@@ -813,6 +813,8 @@ public class SpiralView extends View {
 
         placeAllCircles(c);
 
+        c.drawText( "slider progress is: " + theta, screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
+
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             yearDisplayLandscape(c);
 
@@ -1007,7 +1009,7 @@ public class SpiralView extends View {
 
     public void yearDisplayLandscape(Canvas c) {
 
-          c.drawText("Welcome!", 6.5f * screenWidth / 4, 18 * screenHeight / 40, yearDisplayPaint);
+          c.drawText(getResources().getString(R.string.welcome_to_view), 6.5f * screenWidth / 4, 18 * screenHeight / 40, yearDisplayPaint);
 
 //        c.drawRect( 5 * screenWidth / 4, 0, 2 * screenWidth, screenHeight, bluePaint);
 //        float firstOnScreenTempleIndex = 0;
