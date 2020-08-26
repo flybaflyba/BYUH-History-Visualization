@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder yearPickerDialogBuilder;
     private boolean yearPickerDialogDismissedByPositiveButton;
     private String spaceDependingOnLanguage = "";
+    private int mainColor = Color.parseColor("#931b34");
+    private int sliderButtonColor = Color.parseColor("#932b34");
 
     public class MyTimer extends Handler {
 
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         slider = findViewById(R.id.seekBar3);
         //slider.setBackgroundColor(Color.parseColor("#669cff"));
         //slider.setBackgroundColor(Color.parseColor("#202224"));
-        slider.setBackgroundColor(Color.parseColor("#287a78"));
+        slider.setBackgroundColor(mainColor);
         slider.setProgress(4400);
         //slider.setBackgroundColor(Color.parseColor("#292d30"));
 
@@ -192,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             tv.setDegree(i);
                             tv.invalidate();
-                            Log.d("slider", "slider moved by hand");
+                            //Log.d("slider", "slider moved by hand");
                         }
                         progress = i;
                     } else {
@@ -230,17 +232,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final ImageButton leftButton = findViewById(R.id.slider_left_button);
-        leftButton.setBackgroundColor(Color.parseColor("#007a66"));
+        leftButton.setBackgroundColor(sliderButtonColor);
         // arrow color is the same as spiral background #17252a
+
+
 
 
         leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    leftButton.setBackgroundColor(Color.parseColor("#507a66"));
+                    leftButton.setBackgroundColor(mainColor);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    leftButton.setBackgroundColor(Color.parseColor("#007a66"));
+                    leftButton.setBackgroundColor(sliderButtonColor);
                     if (slider.getProgress() - 30 < 30) {
                         progress = 30;
                     } else {
@@ -256,15 +260,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final ImageButton rightButton = findViewById(R.id.slider_right_button);
-        rightButton.setBackgroundColor(Color.parseColor("#007a66"));
+        rightButton.setBackgroundColor(sliderButtonColor);
 
         rightButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    rightButton.setBackgroundColor(Color.parseColor("#507a66"));
+                    rightButton.setBackgroundColor(mainColor);
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
-                    rightButton.setBackgroundColor(Color.parseColor("#007a66"));
+                    rightButton.setBackgroundColor(sliderButtonColor);
                     if (slider.getProgress() + 30 > 4400) {
                         progress = 4400;
                     } else {
@@ -299,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
         lnlSlider.setOrientation(LinearLayout.VERTICAL);
 
         LinearLayout sliderLabelNoText = findViewById(R.id.sliderLabelNoText);
-        sliderLabelNoText.setBackgroundColor(Color.parseColor("#287a78"));
+        sliderLabelNoText.setBackgroundColor(mainColor);
 
         ((ViewGroup)sliderLabelNoText.getParent()).removeView(sliderLabelNoText);
         lnlSlider.addView(sliderLabelNoText);
@@ -308,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
         lnlSlider.addView(slider);
 
         LinearLayout sliderLabelNoTextTwo = findViewById(R.id.sliderLabelNoTextTwo);
-        sliderLabelNoTextTwo.setBackgroundColor(Color.parseColor("#287a78"));
+        sliderLabelNoTextTwo.setBackgroundColor(mainColor);
 
         ((ViewGroup)sliderLabelNoTextTwo.getParent()).removeView(sliderLabelNoTextTwo);
         lnlSlider.addView(sliderLabelNoTextTwo);

@@ -84,6 +84,7 @@ public class SpiralView extends View {
     private SingleMemberImage singleMemberImageView;
     private int staticCoordinatesGet = 0;
     private AlertDialog singleTempleDialog;
+    private Paint noImageCirclePaint;
 
 
     public SpiralView(Context context) {
@@ -117,6 +118,11 @@ public class SpiralView extends View {
         movingCoordinatesLastTime = new ArrayList<>();
         yearDisplayPaint = new Paint();
         selectedYear = "";
+
+        noImageCirclePaint = new Paint();
+        noImageCirclePaint.setColor(Color.parseColor("#17252a"));
+        noImageCirclePaint.setStyle(Paint.Style.FILL);
+
     }
 
     public void setDegree(int sliderP) {
@@ -766,7 +772,8 @@ public class SpiralView extends View {
 
         //Member View Background color
         //c.drawColor(Color.parseColor("#24292b"));
-        c.drawColor(Color.parseColor("#17252a"));
+//        c.drawColor(Color.parseColor("#17252a"));
+        c.drawColor(Color.parseColor("#c64e67"));
 
         //we just want to load the images once, we don't have to load it every time when we re-draw. otherwise the program is gonna be so slow
         if (loadedImages == false) {
@@ -832,7 +839,7 @@ public class SpiralView extends View {
 
         thisTempleLabelPaint.setColor(Color.parseColor("#def2f1"));
         thisTempleLabelPaint.setStyle(Paint.Style.FILL);
-        thisTempleLabelPaint.setTextSize((int)(newCurrentTempleRadius/3));
+        thisTempleLabelPaint.setTextSize((int)(newCurrentTempleRadius/3));  //if we are drawing the years as main object , before: ((int)(newCurrentTempleRadius/3))
         thisTempleLabelPaint.setTextAlign(Paint.Align.CENTER);
         thisTempleLabelPaint.setShadowLayer(20,0,0,Color.BLACK);
 
@@ -845,6 +852,9 @@ public class SpiralView extends View {
         if (sliderMoving == false && show_label) {
             c.drawText(thisTempleName.substring(thisTempleName.length() - 5), t.x, t.y + newCurrentTempleRadius - thisTempleLabelPaint.getTextSize()/2, thisTempleLabelPaint);
         }
+
+
+
 
 //        Locale curLocale = getResources().getConfiguration().locale;
 //
@@ -912,7 +922,10 @@ public class SpiralView extends View {
         }
 
 //        c.drawBitmap(t, currentTempleMatrix, null);
-        c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
+
+        // we are not drawing the images!!! because we don't have photos...
+        //c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
+        c.drawCircle(t.x, t.y, newCurrentTempleRadius, noImageCirclePaint);
 
     }
 
