@@ -495,16 +495,8 @@ public class MainActivity extends AppCompatActivity {
         yearPickerPicker.setMaxValue(temporary.length - 1); //设置最大值
         //yearPickerPicker.setValue(0);
         yearPickerPicker.setValue(selectedYearIndex);
-        selectedYear = "2015"; // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in TempleView through method.
+        selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in TempleView through method.
         //yearPickerPicker.setTextColor(Color.GRAY);
-
-
-        Locale curLocale = getResources().getConfiguration().locale;
-        if (curLocale.equals(Locale.SIMPLIFIED_CHINESE)) {
-            // do nothing //中文
-        } else {
-            spaceDependingOnLanguage = " "; //英文
-        }
 
         // we can use this text view to pass over want ever year is selected, or we can use a field so that it can be accessed from inner class
         // this text view is the title
@@ -547,10 +539,12 @@ public class MainActivity extends AppCompatActivity {
                 //set onclick method for this button below
                 //Toast.makeText(mContext, yearPickerString, Toast.LENGTH_SHORT).show();
                 //we can use this selected year value to update spiral
+                //Toast.makeText(mContext, "selectedYearIndex: " + selectedYearIndex, Toast.LENGTH_SHORT).show();
                 progress = templeYearsThetaFriends.get(selectedYearIndex);
                 slider.setProgress(lastProgress);
                 tv.setDegree(slider.getProgress());
                 tv.invalidate();
+                Toast.makeText(mContext, "selectedYear: " + selectedYear, Toast.LENGTH_SHORT).show();
                 tv.getSelectedYear(selectedYear);
                 yearPickerDialogDismissedByPositiveButton = true;
             }

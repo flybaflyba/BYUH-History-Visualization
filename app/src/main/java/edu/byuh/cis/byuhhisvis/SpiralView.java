@@ -813,7 +813,8 @@ public class SpiralView extends View {
 
         placeAllCircles(c);
 
-        c.drawText( "slider progress is: " + theta, screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
+        //c.drawText( "slider progress is: " + theta, screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
+        //c.drawText( allYears.get(allYears.size()-1).length() + "", screenWidth / 2, 39 * screenHeight / 40, yearDisplayPaint);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             yearDisplayLandscape(c);
@@ -900,17 +901,10 @@ public class SpiralView extends View {
         Paint selectedYearTempleFramePaint = new Paint();
         selectedYearTempleFramePaint.setColor(Color.parseColor("#287a78"));
         selectedYearTempleFramePaint.setStyle(Paint.Style.FILL);
-        if (selectedYear.equals("Temples under construction") || selectedYear.equals("建设中的圣殿")) {
-            selectedYear = "0000";
-        } else if (selectedYear.equals("Future Temples") || selectedYear.equals("即将奉献的圣殿")) {
-            selectedYear = "1111";
-        }
+
         // if current temple is with selected year then draw a circle frame
         if (allYears.get(thisTempleIndex).equals(selectedYear)) {
             c.drawCircle(t.x, t.y, newCurrentTempleRadius * 1.1f , selectedYearTempleFramePaint);
-            if (!(selectedYear.equals("0000") || selectedYear.equals("1111"))) {
-                c.drawText(selectedYear, 100, 100, yearDisplayPaint);
-            }
 
         } else {
             // do nothing
@@ -918,6 +912,7 @@ public class SpiralView extends View {
 
 //        c.drawBitmap(t, currentTempleMatrix, null);
         c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
+
     }
 
     public void placeAllCircles(Canvas c) {
