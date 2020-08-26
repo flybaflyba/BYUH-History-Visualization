@@ -431,11 +431,7 @@ public class MainActivity extends AppCompatActivity {
     public void showAboutDialog() {
 
         String html = getResources().getString(R.string.about_content_one) + "<br><br>";
-        html += "<a href='" + getResources().getString(R.string.app_website_link) + "'>" + getResources().getString(R.string.about_content_two)+ "</a> <br>";
-        html += "<br>" +
-                 getResources().getString(R.string.about_content_three)+ "<br>" +
-                "<br>" +
-                getResources().getString(R.string.about_content_four);
+        html += getResources().getString(R.string.about_content_four);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getResources().getString(R.string.app_name));
