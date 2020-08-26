@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">后期圣殿</string>
+    <string name="app_name">BYU-H 历史</string>
 
     <string-array name="SpiralEffect">
         <item>默认</item>
@@ -46,9 +46,9 @@
     <string name="language_prefs_title">语言</string>
     <string name="language_prefs_summary">选择应用显示语言</string>
 
-    <string name="show_label_title">圣殿标签</string>
-    <string name="show_label_on">较大的圣殿图片将会显示名称</string>
-    <string name="show_label_off">不显示任何圣殿名称</string>
+    <string name="show_label_title">时间年份</string>
+    <string name="show_label_on">事件年份会在每张照片上显示</string>
+    <string name="show_label_off">隐藏事件年份</string>
     <string name="temples_under_construction">建设中的圣殿</string>
     <string name="view_temples_dedicated_In">奉献的圣殿</string>
     <string name="view">显示</string>
@@ -56,7 +56,7 @@
     <string name="year">年</string>
     <string name="first_temple">第一座圣殿奉献于：</string>
     <string name="app_website_link">http://latterdaytemples.litianzhang.com/android-chinese/</string>
-    <string name="kirtland_temple_is_the_oldest_temple">嘉德兰圣殿是第一座圣殿</string>
-    <string name="dubai_temple_is_the_most_recent_temple">迪拜圣殿是最近宣布的圣殿</string>
+    <string name="kirtland_temple_is_the_oldest_temple">这是BYU-H历史上第一件事件</string>
+    <string name="dubai_temple_is_the_most_recent_temple">这是BYU-H历史上最近一次记录的事件</string>
 
 </resources>

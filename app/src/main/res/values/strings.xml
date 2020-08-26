@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Latter-day Temples</string>
+    <string name="app_name">BYU-H History</string>
 
     <string-array name="SpiralEffect">
         <item>Default</item>
@@ -45,9 +45,9 @@
     <string name="language_prefs_title">Language</string>
     <string name="language_prefs_summary">set display language</string>
 
-    <string name="show_label_title">Temple Label</string>
-    <string name="show_label_on">Temple names will show for larger temples</string>
-    <string name="show_label_off">Temple names will not show for any temples</string>
+    <string name="show_label_title">Event Year</string>
+    <string name="show_label_on">Event year will show on each photos</string>
+    <string name="show_label_off">Hide event year</string>
     <string name="temples_under_construction">Temples under construction</string>
     <string name="view_temples_dedicated_In">View Temple(s) dedicated in</string>
     <string name="view">View</string>
@@ -55,8 +55,8 @@
     <string name="year">Year</string>
     <string name="first_temple">"First temple: "</string>
     <string name="app_website_link">http://latterdaytemples.litianzhang.com/</string>
-    <string name="kirtland_temple_is_the_oldest_temple">Kirtland Temple is the oldest Temple</string>
-    <string name="dubai_temple_is_the_most_recent_temple">Dubai Temple is the most recent Temple</string>
+    <string name="kirtland_temple_is_the_oldest_temple">This is the first event in BYU-H history</string>
+    <string name="dubai_temple_is_the_most_recent_temple">This is the most recent recorded event in BYU-H history</string>
 
 
 </resources>

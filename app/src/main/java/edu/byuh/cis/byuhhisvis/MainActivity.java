@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
         yearPickerDialogDismissedByPositiveButton = false;
         selectedYearIndex = 49;
 
-        Toast.makeText(mContext, "thetas: " + templeYearsThetaFriends.size(), Toast.LENGTH_SHORT).show();
 
 
         WindowManager manager = this.getWindowManager();
@@ -487,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(mContext, "temporary length is: " + temporary.length + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "temporary length is: " + temporary.length + "", Toast.LENGTH_SHORT).show();
         //Toast.makeText(mContext, "allYeas size: " + tv.allYears.size() + "", Toast.LENGTH_SHORT).show();
         //Toast.makeText(mContext, temporary[100] + "", Toast.LENGTH_SHORT).show();
 
@@ -544,7 +543,7 @@ public class MainActivity extends AppCompatActivity {
                 slider.setProgress(lastProgress);
                 tv.setDegree(slider.getProgress());
                 tv.invalidate();
-                Toast.makeText(mContext, "selectedYear: " + selectedYear, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "selectedYear: " + selectedYear, Toast.LENGTH_SHORT).show();
                 tv.getSelectedYear(selectedYear);
                 yearPickerDialogDismissedByPositiveButton = true;
             }
@@ -560,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDismiss(DialogInterface dialog) {
                 //处理监听事件
                 if(!yearPickerDialogDismissedByPositiveButton) {
-                    Toast.makeText(mContext, "You didn't pick any year", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, getResources().getString(R.string.you_didnt_pick_any_year), Toast.LENGTH_SHORT).show();
                 }
                 yearPickerDialogDismissedByPositiveButton = false;
             }
