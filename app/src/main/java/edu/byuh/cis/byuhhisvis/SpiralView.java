@@ -924,8 +924,8 @@ public class SpiralView extends View {
 //        c.drawBitmap(t, currentTempleMatrix, null);
 
         // we are not drawing the images!!! because we don't have photos...
-        //c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
-        c.drawCircle(t.x, t.y, newCurrentTempleRadius, noImageCirclePaint);
+        c.drawBitmap(t.image, currentTempleMatrix, null); // more OO
+        //c.drawCircle(t.x, t.y, newCurrentTempleRadius, noImageCirclePaint);
 
     }
 
