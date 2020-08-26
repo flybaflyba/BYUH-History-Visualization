@@ -277,7 +277,7 @@ public class SpiralView extends View {
 
             int moveTheta = 10;
 
-            boolean thetaMaxReached = theta >= 6800;
+            boolean thetaMaxReached = theta >= 4400;
             boolean thetaMinReached = theta <= 30;
 
             if (leftThirdVertical) {

@@ -266,8 +266,8 @@ public class MainActivity extends AppCompatActivity {
                     rightButton.setBackgroundColor(Color.parseColor("#507a66"));
                 }else if(event.getAction() == MotionEvent.ACTION_UP){
                     rightButton.setBackgroundColor(Color.parseColor("#007a66"));
-                    if (slider.getProgress() + 30 > 6800) {
-                        progress = 6800;
+                    if (slider.getProgress() + 30 > 4400) {
+                        progress = 4400;
                     } else {
                         progress = slider.getProgress() + 30;
                     }
