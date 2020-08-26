@@ -470,11 +470,6 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<String> allYearsWithoutDuplicates = new ArrayList<>();
         for (int i=0; i<tv.allYears.size(); i++) {
             String toBeAdded = tv.allYears.get(i);
-            if (toBeAdded.equals("0000")) {
-                toBeAdded = getResources().getString(R.string.temples_under_construction);
-            } else if (toBeAdded.equals("1111")) {
-                toBeAdded = getResources().getString(R.string.future_temples);
-            }
             if(!allYearsWithoutDuplicates.contains(toBeAdded)) {
                 allYearsWithoutDuplicates.add(toBeAdded);
             }
@@ -494,7 +489,10 @@ public class MainActivity extends AppCompatActivity {
         yearPickerPicker.setMaxValue(temporary.length - 1); //设置最大值
         //yearPickerPicker.setValue(0);
         yearPickerPicker.setValue(selectedYearIndex);
-        selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in TempleView through method.
+
+        if (selectedYear == null) {
+            selectedYear = allYearsWithoutDuplicates.get(allYearsWithoutDuplicates.size()-1); // we need this here, other wise, selectedYear is null when first time open year yearPickerPicker dialog and not moving the yearPickerPicker when passed in TempleView through method.
+        }
         //yearPickerPicker.setTextColor(Color.GRAY);
 
         // we can use this text view to pass over want ever year is selected, or we can use a field so that it can be accessed from inner class
@@ -502,7 +500,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView tx = new TextView(this);
         tx.setGravity(Gravity.CENTER);
 
-        yearPickerString = "2015"; //英文
+        yearPickerString = getResources().getString(R.string.view) + selectedYear + " " + getResources().getString(R.string.events); //英文
 
         tx.setText(yearPickerString);
         tx.setTextSize(20);
@@ -514,7 +512,7 @@ public class MainActivity extends AppCompatActivity {
             public void onValueChange(NumberPicker picker, int i, int i1) {
                 selectedYear = temporary[i1]; // pass this selected value to dialog button, we can use a field so that it can be accessed from inner class
                 selectedYearIndex = i1;
-                yearPickerString = temporary[i1]; //英文
+                yearPickerString = getResources().getString(R.string.view) + temporary[i1] + " " + getResources().getString(R.string.events); //英文
                 tx.setText(yearPickerString);
             }
         });
