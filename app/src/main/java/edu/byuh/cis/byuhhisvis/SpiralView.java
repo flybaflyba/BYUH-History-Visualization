@@ -655,8 +655,8 @@ public class SpiralView extends View {
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             screenWidth = c.getWidth();
             screenHeight = c.getHeight();
-            centerX = screenWidth / 2;
-            centerY = screenHeight / 2;
+            centerX = screenWidth * 0.57f;
+            centerY = screenHeight * 0.5f;
             ultimateScreenWidth = screenWidth;
             yearDisplayPaint.setTextSize((int)(screenHeight / 25));
             //Log.d("PORTRAIT ", "|||||||||||||||||||||||||||||" + screenWidth);
