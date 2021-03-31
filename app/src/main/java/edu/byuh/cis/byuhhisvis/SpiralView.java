@@ -151,37 +151,6 @@ public class SpiralView extends View {
         sliderMoving = s;
     }
 
-    public void readLinksFile() {
-        try {
-            InputStream allTempleLinksFile =  getContext().getResources().openRawResource(R.raw.all_temple_links);
-            if (allTempleLinksFile != null)
-            {
-                InputStreamReader ir = new InputStreamReader(allTempleLinksFile);
-                BufferedReader br = new BufferedReader(ir);
-                String line;
-                //read each line
-                int atThisLine = 0;
-                while (( line = br.readLine()) != null) {
-                    allTempleLinks.add(line+"\n");
-                    if (atThisLine < memberObjects.size()) {
-                        memberObjects.get(atThisLine).setLink(line+"\n");
-                        atThisLine ++;
-                    }
-                }
-                allTempleLinksFile.close();
-            }
-        }
-        catch (java.io.FileNotFoundException e)
-        {
-            Log.d("TestFile", "The File doesn't not exist.");
-        }
-        catch (IOException e)
-        {
-            Log.d("TestFile", e.getMessage());
-        }
-        //Log.d("allTempleLinks is ", allTempleLinks.get(1) + "");
-    }
-
     public void readOneInfoFile(int id) {
         try {
             InputStream allTempleInfoFile =  this.getResources().openRawResource(id);
@@ -796,7 +765,6 @@ public class SpiralView extends View {
             //temples = ImageCache.getTemplesList();
             memberObjects = ImageCache.getTempleObjectsList(); // more OO
 
-            readLinksFile();
             readInfoFile();
 
 
