@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             if (sliderChangedByButton) {
                 eachStep = 1;
             } else {
-                eachStep = 8;
+                eachStep = 1;
             }
 
 

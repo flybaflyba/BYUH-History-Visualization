@@ -15,6 +15,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -205,11 +206,19 @@ public class SpiralView extends View {
     }
 
 
+
+    private VelocityTracker mVelocityTracker = null;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public boolean onTouchEvent(MotionEvent m) {
         float touchX= m.getX();;
         float touchY= m.getY();;
+
+        int index = m.getActionIndex();
+        int action = m.getActionMasked();
+        int pointerId = m.getPointerId(index);
+
         //Log.d("TOUCH EVENT",  " touch event happens on screen at ************* " + touchX + " " + touchY );
         if (m.getAction() == MotionEvent.ACTION_DOWN) {
             downX = m.getX();
@@ -221,6 +230,18 @@ public class SpiralView extends View {
             //Log.d("DOWN",  " finger down on screen at |||||||||||||||" + downX + " " + downY );
             touchDownOnScreenTempleView = TRUE;
             downTime = System.currentTimeMillis();
+
+            if(mVelocityTracker == null) {
+                // Retrieve a new VelocityTracker object to watch the
+                // velocity of a motion.
+                mVelocityTracker = VelocityTracker.obtain();
+            }
+            else {
+                // Reset the velocity tracker back to its initial state.
+                mVelocityTracker.clear();
+            }
+            // Add a user's movement to the tracker.
+            mVelocityTracker.addMovement(m);
         }
 
         if (m.getAction() == MotionEvent.ACTION_MOVE) {
@@ -248,67 +269,97 @@ public class SpiralView extends View {
             boolean middleThirdVertical = (touchX > centerX - screenWidth / 6 && touchX < centerX + screenWidth / 6);
             boolean rightThirdVertical = (touchX >= centerX + screenWidth / 6 );
 
-            int moveTheta = 10;
+            mVelocityTracker.addMovement(m);
+            // When you want to determine the velocity, call
+            // computeCurrentVelocity(). Then call getXVelocity()
+            // and getYVelocity() to retrieve the velocity for each pointer ID.
+            mVelocityTracker.computeCurrentVelocity(1000);
+            // Log velocity of pixels per second
+            // Best practice to use VelocityTrackerCompat where possible.
+//            Log.d("xxx", "X velocity: " + mVelocityTracker.getXVelocity(pointerId));
+//            Log.d("yyy", "Y velocity: " + mVelocityTracker.getYVelocity(pointerId));
+
+            float xVelocityAbsolute = Math.abs(mVelocityTracker.getXVelocity(pointerId));
+            float yVelocityAbsolute = Math.abs(mVelocityTracker.getYVelocity(pointerId));
+            Log.d("xxx", "X velocity: " + xVelocityAbsolute);
+            Log.d("yyy", "Y velocity: " + yVelocityAbsolute);
+
+
+            float moveTheta = 0.01f;
+            int displacementFromLastMove = 0;
 
             boolean thetaMaxReached = theta >= 4400;
             boolean thetaMinReached = theta <= 30;
 
             if (leftThirdVertical) {
-                if (yDisplacementFromLastMove > 0) {
-                    if (thetaMaxReached) {
-                    } else {
-                        theta = theta + moveTheta;
+                moveTheta = (moveTheta * yVelocityAbsolute);
+//                moveTheta = 1.5f;
+                    if (yDisplacementFromLastMove > displacementFromLastMove) {
+                        if (thetaMaxReached) {
+                        } else {
+                            theta = theta + moveTheta;
+                        }
+                    } else if (yDisplacementFromLastMove < -displacementFromLastMove) {
+                        if (thetaMinReached) {
+                        } else {
+                            theta = theta - moveTheta;
+                        }
                     }
-                } else if (yDisplacementFromLastMove < 0) {
-                    if (thetaMinReached) {
-                    } else {
-                        theta = theta - moveTheta;
-                    }
-                }
+
             } else if (rightThirdVertical) {
-                if (yDisplacementFromLastMove > 0) {
-                    if (thetaMinReached) {
-                    } else {
-                        theta = theta - moveTheta;
+                moveTheta = (moveTheta * yVelocityAbsolute);
+//                moveTheta = 1.5f;
+                    if (yDisplacementFromLastMove > displacementFromLastMove) {
+                        if (thetaMinReached) {
+                        } else {
+                            theta = theta - moveTheta;
+                        }
+                    } else if (yDisplacementFromLastMove < -displacementFromLastMove) {
+                        if (thetaMaxReached) {
+                        } else {
+                            theta = theta + moveTheta;
+                        }
                     }
-                } else if (yDisplacementFromLastMove < 0) {
-                    if (thetaMaxReached) {
-                    } else {
-                        theta = theta + moveTheta;
-                    }
-                }
+
+
             } else if (middleThirdVertical) {
-                if (touchY > centerY - screenWidth / 6 && touchY < centerY + screenWidth / 6) {
-                    //do nothing, touch movement in center of spiral is disabled
-                } else if (top) {
-                    //check xd
-                    if (xDisplacementFromLastMove > 0) {
-                        if (thetaMinReached) {
-                        } else {
-                            theta = theta - moveTheta;
+                moveTheta = (moveTheta * xVelocityAbsolute);
+//                moveTheta = 1.5f;
+                    if (touchY > centerY - screenWidth / 6 && touchY < centerY + screenWidth / 6) {
+                        //do nothing, touch movement in center of spiral is disabled
+                    } else if (top) {
+                        //check xd
+                        if (xDisplacementFromLastMove > displacementFromLastMove) {
+                            if (thetaMinReached) {
+                            } else {
+                                theta = theta - moveTheta;
+                            }
+                        } else if (xDisplacementFromLastMove < -displacementFromLastMove) {
+                            if (thetaMaxReached) {
+                            } else {
+                                theta = theta + moveTheta;
+                            }
                         }
-                    } else if (xDisplacementFromLastMove < 0) {
-                        if (thetaMaxReached) {
-                        } else {
-                            theta = theta + moveTheta;
+                    } else if (bottom) {
+                        //check xd
+                        if (xDisplacementFromLastMove > displacementFromLastMove) {
+                            if (thetaMaxReached) {
+                            } else {
+                                theta = theta + moveTheta;
+                            }
+                        } else if (xDisplacementFromLastMove < -displacementFromLastMove) {
+                            if (thetaMinReached) {
+                            } else {
+                                theta = theta - moveTheta;
+                            }
                         }
                     }
-                } else if (bottom) {
-                    //check xd
-                    if (xDisplacementFromLastMove > 0) {
-                        if (thetaMaxReached) {
-                        } else {
-                            theta = theta + moveTheta;
-                        }
-                    } else if (xDisplacementFromLastMove < 0) {
-                        if (thetaMinReached) {
-                        } else {
-                            theta = theta - moveTheta;
-                        }
-                    }
-                }
+
+
             }
         }
+
+
 
         if (m.getAction() == MotionEvent.ACTION_UP) {
             long upTime = System.currentTimeMillis();
