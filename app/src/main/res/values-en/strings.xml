@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BYU-H History</string>
+    <string name="app_name">BYUH History</string>
 
     <string-array name="SpiralEffect">
         <item>Default</item>
@@ -55,8 +55,8 @@
     <string name="year">Year</string>
     <string name="first_temple">"First temple: "</string>
     <string name="app_website_link">http://latterdaytemples.litianzhang.com/android-english/</string>
-    <string name="kirtland_temple_is_the_oldest_temple">This is the first event in BYU-H history</string>
-    <string name="dubai_temple_is_the_most_recent_temple">This is the most recent recorded event in BYU-H history</string>
+    <string name="kirtland_temple_is_the_oldest_temple">This is the first event in BYUH history</string>
+    <string name="dubai_temple_is_the_most_recent_temple">This is the most recent recorded event in BYUH history</string>
     <string name="events">Events</string>
 
 </resources>

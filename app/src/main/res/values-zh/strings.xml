@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BYU-H 历史</string>
+    <string name="app_name">BYUH 历史</string>
 
     <string-array name="SpiralEffect">
         <item>默认</item>
@@ -56,8 +56,8 @@
     <string name="year">年</string>
     <string name="first_temple">第一座圣殿奉献于：</string>
     <string name="app_website_link">http://latterdaytemples.litianzhang.com/android-chinese/</string>
-    <string name="kirtland_temple_is_the_oldest_temple">这是BYU-H历史上第一件事件</string>
-    <string name="dubai_temple_is_the_most_recent_temple">这是BYU-H历史上最近一次记录的事件</string>
+    <string name="kirtland_temple_is_the_oldest_temple">这是BYUH历史上第一件事件</string>
+    <string name="dubai_temple_is_the_most_recent_temple">这是BYUH历史上最近一次记录的事件</string>
     <string name="events">事件</string>
 
 </resources>
